@@ -1,0 +1,48 @@
+version: '3.8'
+
+services:
+  mysql:
+    container_name: mysql_container
+    image: mysql:8.0
+    restart: always
+    ports:
+      - "33060:3306"  # Exponiendo puerto 3306 de MySQL en el puerto 33060 de la máquina host
+    environment:
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      TZ: ${TZ}
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./logs:/var/log/mysql
+    networks:
+      - app_ticket_backend
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-P", "3306", "-u", "${MYSQL_USER}", "-p${MYSQL_PASSWORD}"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  app:
+    container_name: ticket_app_container
+    build: .
+    ports:
+      - "8085:8085"  # La aplicación se expondrá en el puerto 8085
+    depends_on:
+      - mysql
+    environment:
+      SPRING_DATASOURCE_URL: ${SPRING_DATASOURCE_URL}
+      SPRING_DATASOURCE_USERNAME: ${MYSQL_USER}
+      SPRING_DATASOURCE_PASSWORD: ${MYSQL_PASSWORD}
+      SPRING_DATASOURCE_DRIVER_CLASS_NAME: com.mysql.cj.jdbc.Driver
+    networks:
+      - app_ticket_backend
+    restart: always
+
+volumes:
+  mysql_data:
+
+networks:
+  app_ticket_backend:
+    external: true
