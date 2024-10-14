@@ -44,14 +44,14 @@ cd aplicacion_ticket
 
 Para levantar la base de datos MySQL, utiliza Docker Compose con el archivo docker-compose_mysql_ticket.yml:
 
-docker-compose -f docker-compose_ticket.yml up --build
+docker-compose -f docker-compose_ticket.yml up -d --build
 
 ## Instrucciones para correr la aplicación y crear la base de datos MySql
 ## Construir y ejecutar los contenedores con Docker Compose
 
 Para correr la base de datos MySQL y la aplicación, utiliza Docker Compose con el archivo docker-compose_ticket.yml:
 
-docker-compose -f docker-compose_ticket.yml up --build
+docker-compose -f docker-compose_ticket.yml up -d --build
 
 ## Detener los contenedor solo de la base de datos MySql
 
