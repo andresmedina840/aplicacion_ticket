@@ -25,29 +25,29 @@ public class TicketController {
 
     private final TicketService ticketService;
 
-    @GetMapping
+    @GetMapping("/consultarAll")
     public ResponseEntity<Page<Ticket>> getAllTickets(Pageable pageable) {
         return ResponseEntity.ok(ticketService.getAllTickets(pageable));
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/consultar/{id}")
     public ResponseEntity<Ticket> getTicketById(@PathVariable Long id) {
         return ticketService.getTicketById(id)
             .map(ResponseEntity::ok)
             .orElse(ResponseEntity.notFound().build());
     }
 
-    @PostMapping
+    @PostMapping("/crearTicket")
     public ResponseEntity<Ticket> createTicket(@RequestBody Ticket ticket) {
         return new ResponseEntity<>(ticketService.createTicket(ticket), HttpStatus.CREATED);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/actualizar/{id}")
     public ResponseEntity<Ticket> updateTicket(@PathVariable Long id, @RequestBody Ticket ticket) {
         return ResponseEntity.ok(ticketService.updateTicket(id, ticket));
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/borrarTicket/{id}")
     public ResponseEntity<Void> deleteTicket(@PathVariable Long id) {
         ticketService.deleteTicket(id);
         return ResponseEntity.noContent().build();
