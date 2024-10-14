@@ -28,11 +28,11 @@ services:
     container_name: ticket_app_container
     build: .
     ports:
-      - "8085:8085"  # La aplicación se expondrá en el puerto 8085
+      - "8085:8085"
     depends_on:
       - mysql
     environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/${MYSQL_DATABASE}  # Asegúrate de que está apuntando al puerto 3306
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/${MYSQL_DATABASE}
       SPRING_DATASOURCE_USERNAME: ${MYSQL_USER}
       SPRING_DATASOURCE_PASSWORD: ${MYSQL_PASSWORD}
       SPRING_DATASOURCE_DRIVER_CLASS_NAME: com.mysql.cj.jdbc.Driver
