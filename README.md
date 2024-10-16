@@ -39,25 +39,13 @@ TZ=America/Bogota
 git clone https://github.com/andresmedina840/aplicacion_ticket.git
 cd aplicacion_ticket
 
-## Instrucciones solo si quiere construir o crear la base de datos MySql
-## Construir y ejecutar los contenedores con Docker Compose
-
-Para levantar la base de datos MySQL, utiliza Docker Compose con el archivo docker-compose_mysql_ticket.yml:
-
-docker-compose -f docker-compose_ticket.yml up -d --build
-
 ## Instrucciones para correr la aplicación y crear la base de datos MySql
 ## Construir y ejecutar los contenedores con Docker Compose
 
-Para correr la base de datos MySQL y la aplicación, utiliza Docker Compose con el archivo docker-compose_ticket.yml:
+Para correr la base de datos MySQL y la aplicación, utiliza Docker Compose con el archivo docker-compose_ticket.yml, deben
+estar ubicados donde esta el archivo .yml:
 
 docker-compose -f docker-compose_ticket.yml up -d --build
-
-## Detener los contenedor solo de la base de datos MySql
-
-Para detener y eliminar los contenedores, ejecuta el siguiente comando:
-
-docker-compose -f docker-compose_mysql_ticket.yml down
 
 ## Detener el contenedor de la base de datos MySql y Spring Boot
 
